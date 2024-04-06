@@ -51,48 +51,34 @@
             aktualisJatekos = aktualisJatekos == "O" ? "X" : "O";
 
             jatekTablaEllenorzes()
-        } 
+        }
+
+        function ellenorzes(elso, masodik, harmadik) {
+            if (elso !== "" && elso === masodik && elso === harmadik) {
+                alert('Győzött az: ' + elso + "!");
+            }
+        }
+
+        function cellaErtek(id) {
+            return document.getElementById(id).innerText;
+        }
 
         function jatekTablaEllenorzes() {
             // Sorok ellenőrzése
             for (var sor = 0; sor <= 2; sor++) {
-                var elso = document.getElementById("0_" + sor).innerText;
-                var masodik = document.getElementById("1_" + sor).innerText;
-                var harmadik = document.getElementById("2_" + sor).innerText;
-                
-                if (elso !== "" && elso === masodik && elso === harmadik) {
-                    alert('Győzött az: ' + elso + "!");
-                    
-                }
+                ellenorzes(cellaErtek("0_" + sor), cellaErtek("1_" + sor), cellaErtek("2_" + sor));
             }
 
             // oszlopok ellenőrzése
             for (var oszlop = 0; oszlop <= 2; oszlop++) {
-                var elso = document.getElementById(oszlop + "_0").innerText;
-                var masodik = document.getElementById(oszlop + "_1").innerText;
-                var harmadik = document.getElementById(oszlop + "_2").innerText;
-                
-                if (elso !== "" && elso === masodik && elso === harmadik) {
-                    alert('Győzött az: ' + elso + "!");
-                    
-                }
+                ellenorzes(cellaErtek(oszlop + "_0"), cellaErtek(oszlop + "_1"), cellaErtek(oszlop + "_2"));
             }
 
-            //átlók ellenőrzése
-            var elsoAtlo1 = document.getElementById("0_0").innerText;
-            var masodikAtlo1 = document.getElementById("1_1").innerText;
-            var harmadikAtlo1 = document.getElementById("2_2").innerText;
+            // 1 átló ellenőrzése
+            ellenorzes(cellaErtek("0_0"), cellaErtek("1_1"), cellaErtek("2_2"));
 
-            if (elsoAtlo1 !== "" && elsoAtlo1 === masodikAtlo1 && elsoAtlo1 === harmadikAtlo1) {
-                    alert('Győzött az: ' + elsoAtlo1 + "!");
-            }
-            var elsoAtlo2 = document.getElementById("2_0").innerText;
-            var masodikAtlo2 = document.getElementById("1_1").innerText;
-            var harmadikAtlo2 = document.getElementById("0_2").innerText;
-
-            if (elsoAtlo2 !== "" && elsoAtlo2 === masodikAtlo2 && elsoAtlo2 === harmadikAtlo2) {
-                    alert('Győzött az: ' + elsoAtlo2 + "!");
-            }
+            // 2átló ellenőrzése
+            ellenorzes(cellaErtek("2_0"), cellaErtek("1_1"), cellaErtek("0_2"));
         }
 
     </script>
