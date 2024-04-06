@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-tac-toe</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+        }
+        #app {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .tabla {
+            margin: auto;
+            padding: 2rem;
+            border-radius: 2rem;
+            box-shadow: 1px 5px 10px gray;
+            margin: 1rem;
+            min-width: 500px;
+            background-color: aliceblue;
+        }
+        .sor {
+            display: flex;
+        }
+        .sor div {
+            width: 33%;
+            aspect-ratio: 1/1;
+            border: 1px solid black;
+            padding: 10px;
+            float: left;
+            font-size: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sor div#c0_0 {
+            border-radius: 1rem 0 0 0;
+            border-right-width: 0;
+            border-bottom-width: 0;
+        }
+        .sor div#c2_0 {
+            border-radius: 0 1rem 0 0;
+            border-left-width: 0;
+            border-bottom-width: 0;
+        }
+        .sor div#c2_2 {
+            border-radius: 0 0 1rem 0;
+            border-left-width: 0;
+            border-top-width: 0;
+        }
+        .sor div#c0_2 {
+            border-radius: 0 0 0 1rem;
+            border-right-width: 0;
+            border-top-width: 0;
+        }
+        .sor div#c1_1 {
+            border-left-width: 0;
+            border-right-width: 0;
+        }
+        .sor div#c1_0 {
+            border-bottom-width: 0;
+        }
+        .sor div#c1_2 {
+            border-top-width: 0;
+        }
+        #eredmeny,
+        #maint-title {
+            font-size: 25px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <p id="maint-title">A játék indításához kattincs ide</p>
+        <div class="tabla">
+            <div class="sor">
+                <div id="c0_0" onclick="hely(this)"></div> 
+                <div id="c1_0" onclick="hely(this)"></div> 
+                <div id="c2_0" onclick="hely(this)"></div> 
+            </div> 
+            <div class="sor"> 
+                <div id="c0_1" onclick="hely(this)"></div> 
+                <div id="c1_1" onclick="hely(this)"></div> 
+                <div id="c2_1" onclick="hely(this)"></div> 
+            </div> 
+            <div class="sor"> 
+                <div id="c0_2" onclick="hely(this)"></div> 
+                <div id="c1_2" onclick="hely(this)"></div> 
+                <div id="c2_2" onclick="hely(this)"></div> 
+            </div>
+        </div>
+        <div id="eredmeny">A játék folyamtban!</div>
+    </div>
+    <script>
+        var aktualisJatekos = "O";
+
+        function hely(doboz) {
+            if (doboz.innerText != "") return;
+            doboz.innerText = aktualisJatekos;
+            aktualisJatekos = aktualisJatekos == "O" ? "X" : "O";
+
+            jatekTablaEllenorzes()
+        }
+
+        function ellenorzes(elso, masodik, harmadik) {
+            if (elso !== "" && elso === masodik && elso === harmadik) {
+                document.getElementById("eredmeny").innerText = 'Játék vége győzött a(z) ' + elso + "!";
+            }
+        }
+
+        function cellaErtek(id) {
+            return document.getElementById(id).innerText;
+        }
+
+        function jatekTablaEllenorzes() {
+            // Sorok ellenőrzése
+            for (var i = 0; i <= 2; i++) {
+                ellenorzes(cellaErtek("c0_" + i), cellaErtek("c1_" + i), cellaErtek("c2_" + i));
+                ellenorzes(cellaErtek("c" + i + "_0"), cellaErtek("c" + i + "_1"), cellaErtek("c" + i + "_2"));
+            }
+
+            // 1 átló ellenőrzése
+            ellenorzes(cellaErtek("c0_0"), cellaErtek("c1_1"), cellaErtek("c2_2"));
+
+            // 2átló ellenőrzése
+            ellenorzes(cellaErtek("c2_0"), cellaErtek("c1_1"), cellaErtek("c0_2"));
+        }
+
+    </script>
+</body>
+</html>
