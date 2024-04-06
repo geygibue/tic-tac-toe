@@ -5,42 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-tac-toe</title>
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+        }
+        #app {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
         .tabla {
             margin: auto;
+            padding: 2rem;
+            border-radius: 2rem;
+            box-shadow: 1px 5px 10px gray;
+            margin: 1rem;
+            min-width: 500px;
+            background-color: aliceblue;
+        }
+        .sor {
+            display: flex;
         }
         .sor div {
-            width: 30px;
-            height: 30px;
+            width: 33%;
+            aspect-ratio: 1/1;
             border: 1px solid black;
             padding: 10px;
             float: left;
+            font-size: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .sor {
-            clear: both;
+
+        .sor div#c0_0 {
+            border-radius: 1rem 0 0 0;
+            border-right-width: 0;
+            border-bottom-width: 0;
+        }
+        .sor div#c2_0 {
+            border-radius: 0 1rem 0 0;
+            border-left-width: 0;
+            border-bottom-width: 0;
+        }
+        .sor div#c2_2 {
+            border-radius: 0 0 1rem 0;
+            border-left-width: 0;
+            border-top-width: 0;
+        }
+        .sor div#c0_2 {
+            border-radius: 0 0 0 1rem;
+            border-right-width: 0;
+            border-top-width: 0;
+        }
+        .sor div#c1_1 {
+            border-left-width: 0;
+            border-right-width: 0;
+        }
+        .sor div#c1_0 {
+            border-bottom-width: 0;
+        }
+        .sor div#c1_2 {
+            border-top-width: 0;
+        }
+        #eredmeny,
+        #maint-title {
+            font-size: 25px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div onclick="alert('x játékos!');">
-        Kattints ide, hogy "X" vagy "O" legyél. 
-    </div>
-    <p>A játék indításáhez kattincs ide</p>
-    <div class="tabla">
-        <div class="sor">
-            <div id="0_0" onclick="hely(this)"></div> 
-            <div id="1_0" onclick="hely(this)"></div> 
-            <div id="2_0" onclick="hely(this)"></div> 
-        </div> 
-        <div class="sor"> 
-            <div id="0_1" onclick="hely(this)"></div> 
-            <div id="1_1" onclick="hely(this)"></div> 
-            <div id="2_1" onclick="hely(this)"></div> 
-        </div> 
-        <div class="sor"> 
-            <div id="0_2" onclick="hely(this)"></div> 
-            <div id="1_2" onclick="hely(this)"></div> 
-            <div id="2_2" onclick="hely(this)"></div> 
+    <div class="app">
+        <p id="maint-title">A játék indításához kattincs ide</p>
+        <div class="tabla">
+            <div class="sor">
+                <div id="c0_0" onclick="hely(this)"></div> 
+                <div id="c1_0" onclick="hely(this)"></div> 
+                <div id="c2_0" onclick="hely(this)"></div> 
+            </div> 
+            <div class="sor"> 
+                <div id="c0_1" onclick="hely(this)"></div> 
+                <div id="c1_1" onclick="hely(this)"></div> 
+                <div id="c2_1" onclick="hely(this)"></div> 
+            </div> 
+            <div class="sor"> 
+                <div id="c0_2" onclick="hely(this)"></div> 
+                <div id="c1_2" onclick="hely(this)"></div> 
+                <div id="c2_2" onclick="hely(this)"></div> 
+            </div>
         </div>
+        <div id="eredmeny">A játék folyamtban!</div>
     </div>
     <script>
         var aktualisJatekos = "O";
@@ -55,7 +116,7 @@
 
         function ellenorzes(elso, masodik, harmadik) {
             if (elso !== "" && elso === masodik && elso === harmadik) {
-                alert('Győzött az: ' + elso + "!");
+                document.getElementById("eredmeny").innerText = 'Játék vége győzött a(z) ' + elso + "!";
             }
         }
 
@@ -65,20 +126,16 @@
 
         function jatekTablaEllenorzes() {
             // Sorok ellenőrzése
-            for (var sor = 0; sor <= 2; sor++) {
-                ellenorzes(cellaErtek("0_" + sor), cellaErtek("1_" + sor), cellaErtek("2_" + sor));
-            }
-
-            // oszlopok ellenőrzése
-            for (var oszlop = 0; oszlop <= 2; oszlop++) {
-                ellenorzes(cellaErtek(oszlop + "_0"), cellaErtek(oszlop + "_1"), cellaErtek(oszlop + "_2"));
+            for (var i = 0; i <= 2; i++) {
+                ellenorzes(cellaErtek("c0_" + i), cellaErtek("c1_" + i), cellaErtek("c2_" + i));
+                ellenorzes(cellaErtek("c" + i + "_0"), cellaErtek("c" + i + "_1"), cellaErtek("c" + i + "_2"));
             }
 
             // 1 átló ellenőrzése
-            ellenorzes(cellaErtek("0_0"), cellaErtek("1_1"), cellaErtek("2_2"));
+            ellenorzes(cellaErtek("c0_0"), cellaErtek("c1_1"), cellaErtek("c2_2"));
 
             // 2átló ellenőrzése
-            ellenorzes(cellaErtek("2_0"), cellaErtek("1_1"), cellaErtek("0_2"));
+            ellenorzes(cellaErtek("c2_0"), cellaErtek("c1_1"), cellaErtek("c0_2"));
         }
 
     </script>
