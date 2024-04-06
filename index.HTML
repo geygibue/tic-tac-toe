@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-tac-toe</title>
+    <style>
+        .tabla {
+            margin: auto;
+        }
+        .sor div {
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+            padding: 10px;
+            float: left;
+        }
+        .sor {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div onclick="alert('x játékos!');">
+        Kattints ide, hogy "X" vagy "O" legyél. 
+    </div>
+    <p>A játék indításáhez kattincs ide</p>
+    <div class="tabla">
+        <div class="sor">
+            <div id="0_0" onclick="hely(this)"></div> 
+            <div id="1_0" onclick="hely(this)"></div> 
+            <div id="2_0" onclick="hely(this)"></div> 
+        </div> 
+        <div class="sor"> 
+            <div id="0_1" onclick="hely(this)"></div> 
+            <div id="1_1" onclick="hely(this)"></div> 
+            <div id="2_1" onclick="hely(this)"></div> 
+        </div> 
+        <div class="sor"> 
+            <div id="0_2" onclick="hely(this)"></div> 
+            <div id="1_2" onclick="hely(this)"></div> 
+            <div id="2_2" onclick="hely(this)"></div> 
+        </div>
+    </div>
+    <script>
+        var aktualisJatekos = "O";
+
+        function hely(doboz) {
+            if (doboz.innerText != "") return;
+            doboz.innerText = aktualisJatekos;
+            aktualisJatekos = aktualisJatekos == "O" ? "X" : "O";
+
+            jatekTablaEllenorzes()
+        } 
+
+        function jatekTablaEllenorzes() {
+            // Sorok ellenőrzése
+            for (var sor = 0; sor <= 2; sor++) {
+                var elso = document.getElementById("0_" + sor).innerText;
+                var masodik = document.getElementById("1_" + sor).innerText;
+                var harmadik = document.getElementById("2_" + sor).innerText;
+                
+                if (elso !== "" && elso === masodik && elso === harmadik) {
+                    alert('Győzött az: ' + elso + "!");
+                    
+                }
+            }
+
+            // oszlopok ellenőrzése
+            for (var oszlop = 0; oszlop <= 2; oszlop++) {
+                var elso = document.getElementById(oszlop + "_0").innerText;
+                var masodik = document.getElementById(oszlop + "_1").innerText;
+                var harmadik = document.getElementById(oszlop + "_2").innerText;
+                
+                if (elso !== "" && elso === masodik && elso === harmadik) {
+                    alert('Győzött az: ' + elso + "!");
+                    
+                }
+            }
+
+            //átlók ellenőrzése
+            var elsoAtlo1 = document.getElementById("0_0").innerText;
+            var masodikAtlo1 = document.getElementById("1_1").innerText;
+            var harmadikAtlo1 = document.getElementById("2_2").innerText;
+
+            if (elsoAtlo1 !== "" && elsoAtlo1 === masodikAtlo1 && elsoAtlo1 === harmadikAtlo1) {
+                    alert('Győzött az: ' + elsoAtlo1 + "!");
+            }
+            var elsoAtlo2 = document.getElementById("2_0").innerText;
+            var masodikAtlo2 = document.getElementById("1_1").innerText;
+            var harmadikAtlo2 = document.getElementById("0_2").innerText;
+
+            if (elsoAtlo2 !== "" && elsoAtlo2 === masodikAtlo2 && elsoAtlo2 === harmadikAtlo2) {
+                    alert('Győzött az: ' + elsoAtlo2 + "!");
+            }
+        }
+
+    </script>
+</body>
+</html>
