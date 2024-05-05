@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-tac-toe</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div class="app">
+        <div class="tabla">
+            <div class="sor">
+                <div id="c0_0" onclick="hely(this)"></div> 
+                <div id="c1_0" onclick="hely(this)"></div> 
+                <div id="c2_0" onclick="hely(this)"></div> 
+            </div> 
+            <div class="sor"> 
+                <div id="c0_1" onclick="hely(this)"></div> 
+                <div id="c1_1" onclick="hely(this)"></div> 
+                <div id="c2_1" onclick="hely(this)"></div> 
+            </div> 
+            <div class="sor"> 
+                <div id="c0_2" onclick="hely(this)"></div> 
+                <div id="c1_2" onclick="hely(this)"></div> 
+                <div id="c2_2" onclick="hely(this)"></div> 
+            </div>
+        </div>
+        <div id="eredmeny">A játék folyamtban!</div>
+    </div>
+    <div id="startgomb">
+        <a href="./index.html">
+            Exit
+        </a>
+    </div>
+    <script src="./pvp.js" ></script>
+</body>
+</html>
