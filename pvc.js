@@ -5,6 +5,7 @@ var gameover = false;
 
 function hely(doboz) {
     if (doboz.innerText !== "") return;
+    if (gameover) return;
     if (aktualisJatekos == "O") {
         doboz.innerText = aktualisJatekos;
         beirt_cellak++;
@@ -14,34 +15,40 @@ function hely(doboz) {
             document.getElementById("eredmeny").innerText = 'Döntetlen!';
             gameover = true;
         }
-
         aktualisJatekos = "X";
-
-        console.log('gameover', gameover);
         
+        var gondolkodasi_ido = 500 + Math.random() * 1000;
+        setTimeout(comupterTurn, gondolkodasi_ido);
+    }
+}
+function comupterTurn() {
+    // const cursorStyle = document.createElement('style');
+    // cursorStyle.innerHTML = '*{cursor: wait!important;}';
+    // cursorStyle.id = 'cursor-style';
+    // document.head.appendChild(cursorStyle);
+    while (aktualisJatekos === "X" && gameover === false) {
+
         
-        while (aktualisJatekos === "X" && gameover === false) {
-            console.log(aktualisJatekos);
-            
-            var comp_x = Math.floor(Math.random() * 3);
-            var comp_y = Math.floor(Math.random() * 3);
+        var comp_x = Math.floor(Math.random() * 3);
+        var comp_y = Math.floor(Math.random() * 3);
 
-            console.log(comp_x, comp_y);
+        console.log(comp_x, comp_y);
 
-            var cellaId = "c" + comp_x + "_" + comp_y
-            if (cellaErtek(cellaId) === "") {
-                cellaErtek(cellaId, aktualisJatekos);
-                beirt_cellak++;
-                aktualisJatekos = "O";
+        var cellaId = "c" + comp_x + "_" + comp_y
+        if (cellaErtek(cellaId) === "") {
+            cellaErtek(cellaId, aktualisJatekos);
+            beirt_cellak++;
+            aktualisJatekos = "O";
 
-                if (beirt_cellak < 9) jatekTablaEllenorzes();
-                else {
-                    document.getElementById("eredmeny").innerText = 'Döntetlen!';
-                    gameover = true;
-                }
+            if (beirt_cellak < 9) jatekTablaEllenorzes();
+            else {
+                document.getElementById("eredmeny").innerText = 'Döntetlen!';
+                gameover = true;
             }
         }
+
     }
+    // cursorStyle.remove();
 }
 function ellenorzes(elso, masodik, harmadik) {
     if (elso !== "" && elso === masodik && elso === harmadik) {
