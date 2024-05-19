@@ -1,6 +1,7 @@
 var aktualisJatekos = "O";
 var beirt_cellak = 0;
 
+// TODO: győzelem esetén végtelen ciklusba kerül!
 function hely(doboz) {
     if (doboz.innerText !== "") return;
     

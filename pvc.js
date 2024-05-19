@@ -3,6 +3,7 @@ var aktualisJatekos = "O"; // az "O" mindig a player "X" minidg a computer
 var beirt_cellak = 0;
 var gameover = false;
 
+// TODO: ha valaki nyer akkor még mindig lehet a mezőkre klikkelni!
 function hely(doboz) {
     if (doboz.innerText !== "") return;
     if (gameover) return;
