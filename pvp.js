@@ -1,6 +1,16 @@
 var aktualisJatekos = "O";
 var beirt_cellak = 0;
 
+var searchParams = new URLSearchParams(window.location.search);
+var diff = searchParams.get('diff');
+
+var music = document.getElementById("music");
+var audio = music.parentElement;
+music.src = "./assets/music/" + diff +".mp3";
+console.log(music.src);
+audio.load();
+audio.play();
+
 // TODO: győzelem esetén végtelen ciklusba kerül!
 function hely(doboz) {
     if (doboz.innerText !== "") return;

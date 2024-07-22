@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-tac-toe</title>
     <style>
-        #startgomb {
+        #menu {
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 16px;
+            gap: 1rem;
+        }
+        #buttons {
+            display: flex;
+            gap: 1rem
         }
         a {
             text-decoration: none;
@@ -27,17 +32,45 @@
 </head>
 <body>
     <div class="app">
-        <div id="startgomb">
-            <a href="./pvp.html">
-                Player vs. player
-            </a>
-            <a href="./pvc.html">
-                Player vs. computer
+        <div id="menu">
+            <label>
+                Difficulty
+                <select onchange="diffChange(this)">
+                    <option value="easy">
+                        Easy
+                    </option>
+                    <option value="medium">
+                        Medium
+                    </option>
+                    <option value="hard">
+                        Hard
+                    </option>
+                </select>
+            </label>
+            <div id="buttons">
+                <a id="pvp" href="./pvp.html?diff=easy">
+                    Player vs. player
+                </a>
+                <a id="pvc" href="./pvc.html?diff=easy">
+                    Player vs. computer
+                </a>
+            </div>
+            <a href="./index.html">
+                Back to menu
             </a>
         </div>
     </div>
     <script>
+        var diff = "easy";
         
+        function diffChange(select) {
+            var pvp = document.getElementById("pvp")
+            var pvc = document.getElementById("pvc")
+
+            pvp.href = "./pvp.html?diff=" + select.value;
+            pvc.href = "./pvc.html?diff=" + select.value;
+        }
+
     </script>
 </body>
 </html>

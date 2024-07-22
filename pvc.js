@@ -3,6 +3,16 @@ var aktualisJatekos = "O"; // az "O" mindig a player "X" minidg a computer
 var beirt_cellak = 0;
 var gameover = false;
 
+var searchParams = new URLSearchParams(window.location.search);
+var diff = searchParams.get('diff');
+
+var music = document.getElementById("music");
+var audio = music.parentElement;
+music.src = "./assets/music/" + diff +".mp3";
+console.log(music.src);
+audio.load();
+audio.play();
+
 // TODO: ha valaki nyer akkor még mindig lehet a mezőkre klikkelni!
 function hely(doboz) {
     if (doboz.innerText !== "") return;
